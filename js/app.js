@@ -1,3 +1,5 @@
+/*jshint loopfunc:true */
+
 // The data input
 var initList = [
   {title:"Oriental Pearl Tower", location: {lat:31.239689, lng:121.499755}, visibility: true},
@@ -51,6 +53,32 @@ function initMap() {
 
   // Make the InfoWindow. This code below is based on the Udacity Course regarding google maps and google.maps.streetview website: https://developers.google.com/maps/documentation/javascript/streetview
   function populateInfoWindow(marker, infowindow) {
+    // Define the processSVData function outside of the if block
+    // In case the status is OK, which means the pano was found, compute the
+    // position of the streetview image, then calculate the heading, then get a
+    // panorama from that and set the options
+    var processSVData=function(data, status) {
+      if (status == google.maps.StreetViewStatus.OK) {
+        var nearStreetViewLocation = data.location.latLng;
+        var heading = google.maps.geometry.spherical.computeHeading(
+          nearStreetViewLocation, marker.position);
+        infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
+        var panoramaOptions = {
+          position: nearStreetViewLocation,
+          pov: {
+            heading: heading,
+            pitch: 30
+          }
+        };
+        var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano'), panoramaOptions);
+      } else {
+        // Error handling if no street view found
+        infowindow.setContent('<div>' + marker.title + '</div>' +
+          '<div>No Street View Found</div>');
+      }
+    };
+
     // Check to make sure the infowindow is not already opened on this marker. If the below code is not present, the infowindow will refresh every time you click the marker
     if (infowindow.marker != marker) {
       // Clear the infowindow content to give the streetview time to load.
@@ -64,30 +92,7 @@ function initMap() {
       });
       var streetViewService = new google.maps.StreetViewService();
       var radius = 50;
-      // In case the status is OK, which means the pano was found, compute the
-      // position of the streetview image, then calculate the heading, then get a
-      // panorama from that and set the options
-      function processSVData(data, status) {
-        if (status == google.maps.StreetViewStatus.OK) {
-          var nearStreetViewLocation = data.location.latLng;
-          var heading = google.maps.geometry.spherical.computeHeading(
-            nearStreetViewLocation, marker.position);
-          infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
-          var panoramaOptions = {
-            position: nearStreetViewLocation,
-            pov: {
-              heading: heading,
-              pitch: 30
-            }
-          };
-          var panorama = new google.maps.StreetViewPanorama(
-            document.getElementById('pano'), panoramaOptions);
-        } else {
-          // Error handling if no street view found
-          infowindow.setContent('<div>' + marker.title + '</div>' +
-            '<div>No Street View Found</div>');
-        }
-      }
+
       // Use streetview service to get the closest streetview image within
       // 50 meters of the markers position
       streetViewService.getPanorama({location: marker.position, radius: radius}, processSVData);
@@ -95,6 +100,7 @@ function initMap() {
       infowindow.open(map, marker);
 
       // Ajax request for wikipedia information
+      // Note when you test this, wikipedia actually won't recognize Oriental Pearl Tower, Shanghai, or Shanghai Museum, Shanghai, but recognizes The Bund, Shanghai. Therefore always be careful what 3rd party API require you put in your request.
       var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='+marker.title+'&format=json';
 
       // error mechanism: after 8 seconds, executes function below
@@ -110,6 +116,7 @@ function initMap() {
           var linkTitles = data[1];
           var linkURL = data[3];
           for (var i=0; i < linkTitles.length; i++){
+            // Add attribution to Wikipedia
             $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
           }
           //if ajax request is successful, then we clear the timeout function
