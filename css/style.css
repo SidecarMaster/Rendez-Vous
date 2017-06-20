@@ -1,3 +1,10 @@
+/* html, body should be height:100%; if your map holder element is a child of another element then that element should also have height:100%;*/
+html, body, .container-fluid, .row{
+  height: 100%;
+}
+/* The element itself should also have a 100% height or the map won't display*/
+#map { height: 100%; }
+
 /*
  * Base structure
  */
