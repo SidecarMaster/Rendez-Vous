@@ -56,7 +56,22 @@ function initMap() {
     }
     // Create a ko object for data-bind: filter
     this.filter = ko.observable("");
-
+    // Computed observables are functions that are dependent on one or more other observables, and will automatically update whenever any of these dependencies change.
+    this.filterPlaces = ko.computed(function(){
+      for (var j=0; j<initList.length; j++){
+        // javascript indexof() function is case sensitive
+        var filterValue = self.filter().toLowerCase();
+        var toBeMatched = self.placeList()[j].title().toLowerCase();
+        // Filter for the list element
+        self.placeList()[j].visibility(toBeMatched.indexOf(filterValue)>-1);
+        //Filter for the marker
+        if(toBeMatched.indexOf(filterValue)>-1){
+          markers[j].setMap(map);
+        } else {
+          markers[j].setMap(null);
+        }
+      }
+    }, this)
   };
 
   ko.applyBindings(new ViewModel());
