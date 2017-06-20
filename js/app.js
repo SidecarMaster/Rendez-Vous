@@ -44,6 +44,18 @@ function initMap() {
       zoomToArea(this);
     })
   }
+  
+  // Bounce the marker when clicked. Stop the bouncing when clicked again.
+  function toggleBounce(marker){
+    for (var i=0; i < markers.length; i++){
+      markers[i].setAnimation(null);
+    }
+    if(marker.getAnimation()!==null){
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
 
   // The view model
   var ViewModel = function() {
@@ -63,9 +75,9 @@ function initMap() {
         var filterValue = self.filter().toLowerCase();
         var toBeMatched = self.placeList()[j].title().toLowerCase();
         // Filter for the list element
-        self.placeList()[j].visibility(toBeMatched.indexOf(filterValue)>-1);
+        self.placeList()[j].visibility(toBeMatched.indexOf(filterValue)>=0);
         //Filter for the marker
-        if(toBeMatched.indexOf(filterValue)>-1){
+        if(toBeMatched.indexOf(filterValue)>=0){
           markers[j].setMap(map);
         } else {
           markers[j].setMap(null);
