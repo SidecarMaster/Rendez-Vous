@@ -44,7 +44,7 @@ function initMap() {
       zoomToArea(this);
     })
   }
-  
+
   // Bounce the marker when clicked. Stop the bouncing when clicked again.
   function toggleBounce(marker){
     for (var i=0; i < markers.length; i++){
@@ -55,6 +55,21 @@ function initMap() {
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
+  }
+  
+  // Zoom to the Area of the selected marker
+  function zoomToArea(marker){
+    map.setCenter(marker.position);
+    map.setZoom(16);
+  }
+
+  // fit bounds
+  function fitBounds(){
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < initList.length; i++){
+      bounds.extend(markers[i].position);
+    }
+    map.fitBounds(bounds);
   }
 
   // The view model
