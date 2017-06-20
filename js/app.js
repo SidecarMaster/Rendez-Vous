@@ -45,24 +45,6 @@ function initMap() {
     })
   }
 
-  // Bounce the marker when clicked. Stop the bouncing when clicked again.
-  function toggleBounce(marker){
-    for (var i=0; i < markers.length; i++){
-      markers[i].setAnimation(null);
-    }
-    if(marker.getAnimation()!==null){
-      marker.setAnimation(null);
-    } else {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
-
-  // Zoom to the Area of the selected marker
-  function zoomToArea(marker){
-    map.setCenter(marker.position);
-    map.setZoom(16);
-  }
-
   // Make the InfoWindow, this code below is based on the google map streetview website: https://developers.google.com/maps/documentation/javascript/streetview
   function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker. If the below code is not present, the infowindow will refresh every time you click the marker
@@ -132,6 +114,25 @@ function initMap() {
       });
     }
   }
+
+  // Bounce the marker when clicked. Stop the bouncing when clicked again.
+  function toggleBounce(marker){
+    for (var i=0; i < markers.length; i++){
+      markers[i].setAnimation(null);
+    }
+    if(marker.getAnimation()!==null){
+      marker.setAnimation(null);
+    } else {
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
+  // Zoom to the Area of the selected marker
+  function zoomToArea(marker){
+    map.setCenter(marker.position);
+    map.setZoom(16);
+  }
+
   // fit bounds
   function fitBounds(){
     var bounds = new google.maps.LatLngBounds();
@@ -168,6 +169,18 @@ function initMap() {
         }
       }
     }, this)
+    // Click on one of the list elements
+    this.setMarker= function(selectedPlace){
+      //console.log(selectedPlace.location());
+      // console.log(initList[0].location);
+      for (var i=0; i < markers.length; i++){
+        if(selectedPlace.location()===initList[i].location){
+          populateInfoWindow(markers[i], infoWindow);
+          toggleBounce(markers[i]);
+          zoomToArea(markers[i]);
+        }
+      }
+    }
   };
 
   ko.applyBindings(new ViewModel());

@@ -82,6 +82,19 @@ li {
   display: block;
 }
 
+/* hover is when your mouse hovers over the selected element*/
+li:hover{
+  color: #fff;
+  background-color: #428bca;
+}
+
+.nav-sidebar > .active,
+.nav-sidebar > .active:hover,
+.nav-sidebar > .active:focus {
+  /*color: #fff;*/
+  /*background-color: #428bca;*/
+  width: 100%;
+}
 
 /*
  * Main content
