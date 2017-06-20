@@ -43,7 +43,7 @@ function initMap() {
       populateInfoWindow(this, infoWindow);
       toggleBounce(this);
       zoomToArea(this);
-    })
+    });
   }
 
   // Declare an infoWindow variable
@@ -72,14 +72,14 @@ function initMap() {
           var nearStreetViewLocation = data.location.latLng;
           var heading = google.maps.geometry.spherical.computeHeading(
             nearStreetViewLocation, marker.position);
-            infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
-            var panoramaOptions = {
-              position: nearStreetViewLocation,
-              pov: {
-                heading: heading,
-                pitch: 30
-              }
-            };
+          infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
+          var panoramaOptions = {
+            position: nearStreetViewLocation,
+            pov: {
+              heading: heading,
+              pitch: 30
+            }
+          };
           var panorama = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), panoramaOptions);
         } else {
@@ -108,7 +108,6 @@ function initMap() {
         success: function(data){
           // console.log(data);
           var linkTitles = data[1];
-          var linkSnippet = data[2];
           var linkURL = data[3];
           for (var i=0; i < linkTitles.length; i++){
             $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
@@ -173,7 +172,7 @@ function initMap() {
           markers[j].setMap(null);
         }
       }
-    }, this)
+    }, this);
     // Click on one of the list elements
     this.setMarker= function(selectedPlace){
       //console.log(selectedPlace.location());
@@ -185,7 +184,7 @@ function initMap() {
           zoomToArea(markers[i]);
         }
       }
-    }
+    };
   };
 
   ko.applyBindings(new ViewModel());
