@@ -14,7 +14,11 @@ body {
   padding-top: 50px;
 }
 
-
+img {
+  width: 50px;
+  float: right;
+  padding-right: 20px;
+}
 /*
  * Global add-ons
  */

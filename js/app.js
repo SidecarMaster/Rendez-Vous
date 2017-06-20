@@ -106,7 +106,7 @@ function initMap() {
           var linkSnippet = data[2];
           var linkURL = data[3];
           for (var i=0; i < linkTitles.length; i++){
-            $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li>').insertAfter(".infowindow--title");
+            $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
           }
           //if ajax request is successful, then we clear the timeout function
           clearTimeout(wikiRequestTimeout);
