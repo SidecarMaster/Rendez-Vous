@@ -5,7 +5,11 @@ var initList = [
   {title:"Shanghai Disneyland", location:{lat:31.145279, lng:121.657289}, visibility: true},
   {title:"The Bund, Shanghai", location:{lat:31.240261, lng:121.490577}, visibility: true},
   {title:"Yu Garden", location:{lat:31.227236, lng:121.492094}, visibility: true},
-  {title:"Shanghai Tower", location:{lat:31.233502, lng:121.505763}, visibility: true}
+  {title:"Shanghai Tower", location:{lat:31.233502, lng:121.505763}, visibility: true},
+  {title:"Jade Buddha Temple", location:{lat:31.241347, lng:121.445121}, visibility:true},
+  {title:"Nanjing Road", location:{lat:31.234774, lng:121.474798}, visibility:true},
+  {title:"Shanghai Museum", location:{lat:31.228331, lng:121.475528}, visibility:true},
+  {title:"Shanghai French Concession", location:{lat:31.207897, lng:121.468997}, visibility:true},
 ];
 
 // The model
@@ -23,9 +27,6 @@ function initMap() {
     //styles: styles,
     //mapTypeControl: false
   });
-
-  // Make the infoWindow
-  var infoWindow = new google.maps.InfoWindow();
 
   // Make the markers
   var markers = [];
@@ -45,7 +46,10 @@ function initMap() {
     })
   }
 
-  // Make the InfoWindow, this code below is based on the google map streetview website: https://developers.google.com/maps/documentation/javascript/streetview
+  // Declare an infoWindow variable
+  var infoWindow = new google.maps.InfoWindow();
+
+  // Make the InfoWindow. This code below is based on the Udacity Course regarding google maps and google.maps.streetview website: https://developers.google.com/maps/documentation/javascript/streetview
   function populateInfoWindow(marker, infowindow) {
     // Check to make sure the infowindow is not already opened on this marker. If the below code is not present, the infowindow will refresh every time you click the marker
     if (infowindow.marker != marker) {
@@ -79,6 +83,7 @@ function initMap() {
           var panorama = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), panoramaOptions);
         } else {
+          // Error handling if no street view found
           infowindow.setContent('<div>' + marker.title + '</div>' +
             '<div>No Street View Found</div>');
         }
@@ -101,7 +106,7 @@ function initMap() {
         url: wikiURL,
         dataType: 'jsonp',
         success: function(data){
-          console.log(data);
+          // console.log(data);
           var linkTitles = data[1];
           var linkSnippet = data[2];
           var linkURL = data[3];
