@@ -14,6 +14,11 @@ var initList = [
   {title:"Shanghai French Concession", location:{lat:31.207897, lng:121.468997}, visibility:true},
 ];
 
+// Error handling if google map doesn't load
+var googleMapLoadError = function(){
+  alert("Error when loading google maps");
+}
+
 // The model
 var Place = function(data) {
   this.title = ko.observable(data.title);
@@ -103,25 +108,20 @@ function initMap() {
       // Note when you test this, wikipedia actually won't recognize Oriental Pearl Tower, Shanghai, or Shanghai Museum, Shanghai, but recognizes The Bund, Shanghai. Therefore always be careful what 3rd party API require you put in your request.
       var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='+marker.title+'&format=json';
 
-      // error mechanism: after 8 seconds, executes function below
-      var wikiRequestTimeout = setTimeout(function(){
-        $("<p>Failed to get wikipedia resources</p>").insertAfter(".infowindow--title");
-      }, 8000);
-
       $.ajax({
         url: wikiURL,
-        dataType: 'jsonp',
-        success: function(data){
-          // console.log(data);
-          var linkTitles = data[1];
-          var linkURL = data[3];
-          for (var i=0; i < linkTitles.length; i++){
-            // Add attribution to Wikipedia
-            $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
-          }
-          //if ajax request is successful, then we clear the timeout function
-          clearTimeout(wikiRequestTimeout);
+        dataType: 'jsonp'
         }
+      ).done(function(data){
+        // console.log(data);
+        var linkTitles = data[1];
+        var linkURL = data[3];
+        for (var i=0; i < linkTitles.length; i++){
+          // Add attribution to Wikipedia
+          $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
+        }
+      }).fail(function(jqXHR, textStatus){
+        $("<p>Failed to get wikipedia resources</p>").insertAfter(".infowindow--title");
       });
     }
   }

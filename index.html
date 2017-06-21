@@ -37,7 +37,8 @@
 
     <div class="container-fluid">
       <div class="row">
-        <div id="sidebar" class="col-sm-3 col-md-2 sidebar">
+        <!-- Use aside semantic tag to add Aside page landmark -->
+        <aside id="sidebar" class="col-sm-3 col-md-2 sidebar">
           <div class="nav nav-sidebar">
             <!-- Use placeholder attribute here to show default value in the input box -->
             <input class="active" data-bind="textInput: filter" type="text" placeholder="Input a location from the list below...">
@@ -45,9 +46,9 @@
               <li data-bind="text: title, visible: visibility, click: $parent.setMarker"></li>
             </ul>
           </div>
-        </div>
-        <div id="map" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
-        </div>
+        </aside>
+        <!-- Use main semantic tag here to add Main page landmark -->
+        <main id="map" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></main>
       </div>
     </div>
 
@@ -56,7 +57,8 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- knockout.js must be before app.js otherwise app.js will try to access ko object before it's been defined in the knockout.js file -->
     <script src="js/knockout-3.4.2.js"></script>
+    <!-- load app.js before map to make sure Map's callback or error function is ready to be called. -->
     <script src="js/app.js"></script>
-    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJsDobOejh9fdD2h57E6_qDqn5vr66v-U&callback=initMap"></script>
+    <script async onerror="googleMapLoadError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJsDobOejh9fdD2h57E6_qDqn5vr66v-U&callback=initMap"></script>
   </body>
 </html>
