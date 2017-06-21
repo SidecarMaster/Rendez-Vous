@@ -1,18 +1,30 @@
 /*jshint loopfunc:true */
 
-// The data input
-var initList = [
-  {title:"Oriental Pearl Tower", location: {lat:31.239689, lng:121.499755}, visibility: true},
-  {title:"Shanghai Ocean Aquarium", location:{lat:31.240696, lng:121.501759}, visibility: true},
-  {title:"Shanghai Disneyland", location:{lat:31.145279, lng:121.657289}, visibility: true},
-  {title:"The Bund, Shanghai", location:{lat:31.240261, lng:121.490577}, visibility: true},
-  {title:"Yu Garden", location:{lat:31.227236, lng:121.492094}, visibility: true},
-  {title:"Shanghai Tower", location:{lat:31.233502, lng:121.505763}, visibility: true},
-  {title:"Jade Buddha Temple", location:{lat:31.241347, lng:121.445121}, visibility:true},
-  {title:"Nanjing Road", location:{lat:31.234774, lng:121.474798}, visibility:true},
-  {title:"Shanghai Museum", location:{lat:31.228331, lng:121.475528}, visibility:true},
-  {title:"Shanghai French Concession", location:{lat:31.207897, lng:121.468997}, visibility:true},
-];
+//The data input
+// var initList = [
+//   {title:"Oriental Pearl Tower", location: {lat:31.239689, lng:121.499755}, visibility: true},
+//   {title:"Shanghai Ocean Aquarium", location:{lat:31.240696, lng:121.501759}, visibility: true},
+//   {title:"Shanghai Disneyland", location:{lat:31.145279, lng:121.657289}, visibility: true},
+//   {title:"The Bund, Shanghai", location:{lat:31.240261, lng:121.490577}, visibility: true},
+//   {title:"Yu Garden", location:{lat:31.227236, lng:121.492094}, visibility: true},
+//   {title:"Shanghai Tower", location:{lat:31.233502, lng:121.505763}, visibility: true},
+//   {title:"Jade Buddha Temple", location:{lat:31.241347, lng:121.445121}, visibility:true},
+//   {title:"Nanjing Road", location:{lat:31.234774, lng:121.474798}, visibility:true},
+//   {title:"Shanghai Museum", location:{lat:31.228331, lng:121.475528}, visibility:true},
+//   {title:"Shanghai French Concession", location:{lat:31.207897, lng:121.468997}, visibility:true},
+// ];
+
+var initList;
+// Fetch the JSON data
+$.ajax({
+  type: "GET",
+  url: "http://localhost:8000/js/data.json",
+  dataType: "jsonp"
+}).done(function(data) {
+  initList=data;
+}).fail(function(jqXHR, textStatus, errorThrown){
+  alert("Place data cannot be retrieved due to "+errorThrown);
+});
 
 // Error handling if google map doesn't load
 var googleMapLoadError = function(){
@@ -67,7 +79,7 @@ function initMap() {
         var nearStreetViewLocation = data.location.latLng;
         var heading = google.maps.geometry.spherical.computeHeading(
           nearStreetViewLocation, marker.position);
-        infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
+      //  infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div>');
         var panoramaOptions = {
           position: nearStreetViewLocation,
           pov: {
@@ -98,12 +110,6 @@ function initMap() {
       var streetViewService = new google.maps.StreetViewService();
       var radius = 50;
 
-      // Use streetview service to get the closest streetview image within
-      // 50 meters of the markers position
-      streetViewService.getPanorama({location: marker.position, radius: radius}, processSVData);
-      // Open the infowindow on the correct marker.
-      infowindow.open(map, marker);
-
       // Ajax request for wikipedia information
       // Note when you test this, wikipedia actually won't recognize Oriental Pearl Tower, Shanghai, or Shanghai Museum, Shanghai, but recognizes The Bund, Shanghai. Therefore always be careful what 3rd party API require you put in your request.
       var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='+marker.title+'&format=json';
@@ -118,10 +124,21 @@ function initMap() {
         var linkURL = data[3];
         for (var i=0; i < linkTitles.length; i++){
           // Add attribution to Wikipedia
-          $('<li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">').insertAfter(".infowindow--title");
+          infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div><li><a href="'+linkURL[i]+'">'+linkURL[i]+'</a></li><img src="img/Wikipedia_wordmark@2x.png">');
+          // Use streetview service to get the closest streetview image within
+          // 50 meters of the markers position
+          streetViewService.getPanorama({location: marker.position, radius: radius}, processSVData);
+          // Open the infowindow on the correct marker.
+          infowindow.open(map, marker);
         }
       }).fail(function(jqXHR, textStatus){
-        $("<p>Failed to get wikipedia resources</p>").insertAfter(".infowindow--title");
+        //$("<p>Failed to get wikipedia resources</p>").insertAfter(".infowindow--title");
+          infowindow.setContent('<div id="pano"></div><div class="infowindow--title">'+ marker.title + '</div><p>Failed to get wikipedia resources</p>');
+          // Use streetview service to get the closest streetview image within
+          // 50 meters of the markers position
+          streetViewService.getPanorama({location: marker.position, radius: radius}, processSVData);
+          // Open the infowindow on the correct marker.
+          infowindow.open(map, marker);
       });
     }
   }
