@@ -194,9 +194,7 @@ function initMap() {
     };
 
     ko.applyBindings(new ViewModel());
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    alert("Place data cannot be retrieved due to "+errorThrown);
   });
 }
-// ).fail(function(jqXHR, textStatus, errorThrown){
-//   alert("Place data cannot be retrieved due to "+errorThrown);
-// });
-// }
