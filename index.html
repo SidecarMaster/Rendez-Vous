@@ -53,7 +53,8 @@
     </div>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Error handler for Ajax request is not working because jQuery version is too old. Updated to request the latest version for jQuery so that this error handler will work for jsonp request. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- knockout.js must be before app.js otherwise app.js will try to access ko object before it's been defined in the knockout.js file -->
     <script src="js/knockout-3.4.2.js"></script>
