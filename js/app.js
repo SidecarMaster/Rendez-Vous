@@ -1,40 +1,56 @@
 /*jshint loopfunc:true */
 
+// Temporarily moved here
+var data = [
+  [
+    {"icon": '<a href="#"><i class="icon-camera"></i></a>', "type": "recommend", "currentType": true},
+    {"icon": '<a href="#"><i class="icon-tree"></i></a>', "type": "outdoor", "currentType": false},
+    {"icon": '<a href="#"><i class="icon-bar"></i></a>', "type": "bar", "currentType": false},
+    {"icon": '<a href="#"><i class="icon-bed"></i></a>', "type": "hotel", "currentType": false}
+
+  ],
+  [
+    {"name":"Oriental Pearl Tower", "location": {"lat":31.239689, "lng":121.499755}, "visibility": true, "type": "recommend"},
+    {"name":"Shanghai Ocean Aquarium", "location":{"lat":31.240696, "lng":121.501759}, "visibility": true, "type": "recommend"},
+    {"name":"Shanghai Disneyland", "location":{"lat":31.145279, "lng":121.657289}, "visibility": true, "type": "recommend"},
+    {"name":"The Bund, Shanghai", "location":{"lat":31.240261, "lng":121.490577}, "visibility": true, "type": "recommend"},
+    {"name":"Yu Garden", "location":{"lat":31.227236, "lng":121.492094}, "visibility": true, "type": "recommend"},
+    {"name":"Shanghai Tower", "location":{"lat":31.233502, "lng":121.505763}, "visibility": true, "type": "recommend"},
+    {"name":"Jade Buddha Temple", "location":{"lat":31.241347, "lng":121.445121}, "visibility":true, "type": "recommend"},
+    {"name":"Nanjing Road", "location":{"lat":31.234774, "lng":121.474798}, "visibility":true, "type": "recommend"},
+    {"name":"Shanghai Museum", "location":{"lat":31.228331, "lng":121.475528}, "visibility":true, "type": "recommend"},
+    {"name":"Shanghai French Concession", "location":{"lat":31.207897, "lng":121.468997}, "visibility":true, "type": "recommend"}
+  ]
+];
+
 // Error handling if google map doesn't load
 var googleMapLoadError = function(){
   alert("Error when loading google maps");
 };
 
-// The model
-var Place = function(data) {
-  this.title = ko.observable(data.title);
-  this.location = ko.observable(data.location);
-  this.visibility = ko.observable(data.visibility);
-};
-
-// The callback init function
+/* The callback init function
+ *
+ */
 function initMap() {
 
   //Fetch the JSON data
-  $.ajax({
-    url: "js/data.json",
-    dataType: "json"
-  }).done(function(data) {
-    console.log(data);
-    var initList=data;
+  // $.ajax({
+  //   url: "js/data.json",
+  //   dataType: "json"
+  // }).done(function(data) {
     var map = new google.maps.Map(document.getElementById("map"), {
       center: {lat:31.239689, lng:121.499755},
       zoom: 15,
-      //styles: styles,
+      styles: styles
       //mapTypeControl: false
     });
 
     // Make the markers
     var markers = [];
-    for (var i=0; i<initList.length; i++){
+    for (var i=0; i<data[1].length; i++){
       var marker = new google.maps.Marker({
-        position: initList[i].location,
-        title: initList[i].title,
+        position: data[1][i].location,
+        title: data[1][i].name,
         animation: google.maps.Animation.DROP,
         map: map,
         id: i
@@ -146,55 +162,107 @@ function initMap() {
     // fit bounds
     function fitBounds(){
       var bounds = new google.maps.LatLngBounds();
-      for (var i = 0; i < initList.length; i++){
+      for (var i = 0; i < data[1].length; i++){
         bounds.extend(markers[i].position);
       }
       map.fitBounds(bounds);
     }
 
-    // The view model
+    // Code below cause browser to respond really slow
+    // google.maps.event.addDomListener(window, 'resize', function() {
+    //   var bounds = new google.maps.LatLngBounds();
+    //   for (var i = 0; i < data.length; i++){
+    //     bounds.extend(markers[i].position);
+    //   }
+    //   map.fitBounds(bounds); // `bounds` is a `LatLngBounds` object
+    // });
+
+    /* The model
+     *
+     */
+    var Place = function(place) {
+      this.name = ko.observable(place.name);
+      this.location = ko.observable(place.location);
+      this.visibility = ko.observable(place.visibility);
+    };
+
+    var PlaceType = function(placeType) {
+      this.icon = ko.observable(placeType.icon);
+      this.type = ko.observable(placeType.type);
+      this.currentType = ko.observable(placeType.currentType);
+    };
+
+    /* The view model
+     *
+     */
     var ViewModel = function() {
       var self = this;
 
       this.placeList = ko.observableArray([]);
 
-      for (var i=0; i<initList.length; i++){
-        self.placeList.push(new Place(initList[i]));
+      for (var i=0; i<data[1].length; i++){
+        self.placeList.push(new Place(data[1][i]));
       }
+
       // Create a ko object for data-bind: filter
       this.filter = ko.observable("");
       // Computed observables are functions that are dependent on one or more other observables, and will automatically update whenever any of these dependencies change.
       this.filterPlaces = ko.computed(function(){
-        for (var j=0; j<initList.length; j++){
+        for (var i=0; i<data[1].length; i++){
           // javascript indexof() function is case sensitive
           var filterValue = self.filter().toLowerCase();
-          var toBeMatched = self.placeList()[j].title().toLowerCase();
+          var toBeMatched = self.placeList()[i].name().toLowerCase();
           // Filter for the list element
-          self.placeList()[j].visibility(toBeMatched.indexOf(filterValue)>=0);
+          self.placeList()[i].visibility(toBeMatched.indexOf(filterValue)>=0);
           //Filter for the marker
           if(toBeMatched.indexOf(filterValue)>=0){
-            markers[j].setMap(map);
+            markers[i].setMap(map);
           } else {
-            markers[j].setMap(null);
+            markers[i].setMap(null);
           }
         }
       }, this);
-      // Click on one of the list elements
+      // Click on one of the placeList elements
       this.setMarker= function(selectedPlace){
         //console.log(selectedPlace.location());
-        // console.log(initList[0].location);
+        // console.log(data[0].location);
         for (var i=0; i < markers.length; i++){
-          if(selectedPlace.location()===initList[i].location){
+          // since selectedPlace is a ko object, to return its location, you have to use .location()
+          if(selectedPlace.location()===data[1][i].location){
             populateInfoWindow(markers[i], infoWindow);
             toggleBounce(markers[i]);
             zoomToArea(markers[i]);
           }
         }
       };
+
+      // filter place types
+      this.placeType = ko.observableArray([]);
+
+      for (var j=0; j<data[0].length; j++){
+        self.placeType.push(new PlaceType(data[0][j]));
+      }
+
+      // Click on one of the placeType elements
+      this.setType = function(selectedType){
+        for (var i=0; i < data[0].length; i++) {
+          self.placeType()[i].currentType(false);
+        }
+        selectedType.currentType(true);
+        for (var j=0; j < data[1].length; j++) {
+          if (selectedType.type()===data[1][j].type){
+            self.placeList()[j].visibility(true);
+          } else {
+            self.placeList()[j].visibility(false);
+          }
+        }
+      }
     };
 
     ko.applyBindings(new ViewModel());
-  }).fail(function(jqXHR, textStatus, errorThrown){
-    alert("Place data cannot be retrieved due to "+errorThrown);
-  });
-}
+
+  }
+// ).fail(function(jqXHR, textStatus, errorThrown){
+//     alert("Place data cannot be retrieved due to "+errorThrown);
+//   });
+// }
