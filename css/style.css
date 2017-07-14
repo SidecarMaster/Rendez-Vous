@@ -42,6 +42,14 @@ img {
   border: 0;
 }
 
+.navbar-inverse .navbar-brand {
+  color: #eee;
+}
+
+.navbar-inverse .navbar-brand:hover {
+  color: white;
+}
+
 /*
  * Sidebar
  */
@@ -69,19 +77,50 @@ img {
  *
  */
 
-/* make the icon always in the same line*/
+/* make the icon float left so that always in the same line*/
 .navbar-nav>li {
   float: left;
 }
 
+/* make the icon padding shorter so that always in the same line*/
 .navbar-nav>li>a {
   padding: 15px 13px;
-  line-height: 20px;
+  line-height: 12px;
 }
 
-/* selected type will be amplified */
+/* selected type will be magnified */
 .currentType {
  font-size: 1.5em;
+}
+
+/* Tooltip container */
+.navbar-nav>li {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.navbar-nav>li .tooltiptext {
+    font-size: 12px;
+    visibility: hidden;
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -40px; /* Use half of the width (80/2 = 40), to center the tooltip */
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.navbar-nav>li:hover .tooltiptext {
+    visibility: visible;
 }
 
 /* PlaceList styles
@@ -151,6 +190,15 @@ margin-top: 0;
 
   .navbar-toggle {
     display: none;
+  }
+  /* PlaceType styles
+   *
+   */
+
+  /* top and bottom margin for the placetype navbar*/
+  #navbar {
+    margin-top: 10px;
+    margin-bottom: 5px;
   }
 }
 

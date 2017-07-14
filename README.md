@@ -1,4 +1,4 @@
-# Shanghai-10-Must-Sees
+# Rendez-Vous
 
 ## How to Run the application
   1. Download the Github Repo.

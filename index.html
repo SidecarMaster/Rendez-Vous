@@ -42,13 +42,14 @@
         <aside id="sidebar" class="sidebar">
           <div class="nav nav-sidebar">
             <!-- Use placeholder attribute here to show default value in the input box -->
-            <input class="active" data-bind="textInput: filter" type="text" placeholder="Input a location from the list below...">
+            <input data-bind="textInput: filter" type="text" class="active" placeholder="Input a location from the list below...">
             <div id="navbar" class="navbar-collapse">
-              <ul class="placeType nav navbar-nav" data-bind="foreach: placeType">
+              <ul data-bind="foreach: placeType" class="placeType nav navbar-nav">
+                <!-- It seems css bind will remove all original classes -->
                 <li data-bind="html: icon, click: $parent.setType, css: { currentType: currentType()===true }"></li>
               </ul>
             </div>
-            <ul class="placeList nav nav-sidebar" data-bind="foreach: placeList">
+            <ul data-bind="foreach: placeList" class="placeList nav nav-sidebar">
               <li data-bind="text: name, visible: visibility, click: $parent.setMarker"></li>
             </ul>
           </div>
