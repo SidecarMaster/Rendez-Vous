@@ -6,48 +6,48 @@ var data = [
     {"icon": '<a href="#"><i class="icon-camera"></i><span class="tooltiptext">Sightseeing</span></a>', "type": "sightseeing", "currentType": true},
     {"icon": '<a href="#"><i class="icon-tree"></i><span class="tooltiptext">Outdoor</span></a>', "type": "outdoor", "currentType": false},
     {"icon": '<a href="#"><i class="icon-bars"></i><span class="tooltiptext">Bar</span></a>', "type": "bar", "currentType": false},
-    {"icon": '<a href="#"><i class="icon-bed"></i><span class="tooltiptext">Hotel</span></a>', "type": "hotel", "currentType": false}
-
+    {"icon": '<a href="#"><i class="icon-bed"></i><span class="tooltiptext">Hotel</span></a>', "type": "hotel", "currentType": false},
+    {"icon": '<a href="#">ALL<span class="tooltiptext">See All</span></a>', "type": "all", "currentType": false}
   ],
   [
-    {"name":"Oriental Pearl Tower", "location": {"lat":31.239689, "lng":121.499755}, "visibility": true, "type": "sightseeing"},
-    {"name":"Shanghai Ocean Aquarium", "location":{"lat":31.240696, "lng":121.501759}, "visibility": true, "type": "sightseeing"},
-    {"name":"Shanghai Disneyland", "location":{"lat":31.145279, "lng":121.657289}, "visibility": true, "type": "sightseeing"},
-    {"name":"The Bund, Shanghai", "location":{"lat":31.240261, "lng":121.490577}, "visibility": true, "type": "sightseeing"},
-    {"name":"Yu Garden", "location":{"lat":31.227236, "lng":121.492094}, "visibility": true, "type": "sightseeing"},
-    {"name":"Shanghai Tower", "location":{"lat":31.233502, "lng":121.505763}, "visibility": true, "type": "sightseeing"},
-    {"name":"Jade Buddha Temple", "location":{"lat":31.241347, "lng":121.445121}, "visibility":true, "type": "sightseeing"},
-    {"name":"Nanjing Road", "location":{"lat":31.234774, "lng":121.474798}, "visibility":true, "type": "sightseeing"},
-    {"name":"Shanghai Museum", "location":{"lat":31.228331, "lng":121.475528}, "visibility":true, "type": "sightseeing"},
-    {"name":"Shanghai French Concession", "location":{"lat":31.207897, "lng":121.468997}, "visibility":true, "type": "sightseeing"},
-    {"name":"Radisson Blu Hotel Shanghai New World", "location": {"lat":31.234419, "lng":121.473541}, "visibility":true, "type":"hotel"},
-    {"name":"Marriott Hotel & Resorts", "location": {"lat":31.236871, "lng":121.473306}, "visibility":true, "type":"hotel"},
-    {"name":"Astor House Hotel", "location": {"lat":31.243964, "lng":121.491291}, "visibility":true, "type":"hotel"},
-    {"name":"The Longemont Shanghai", "location": {"lat":31.210758, "lng":121.42942}, "visibility":true, "type":"hotel"},
-    {"name":"Grand Hyatt Shanghai", "location": {"lat":31.235344, "lng":121.50578}, "visibility":true, "type":"hotel"},
-    {"name":"Waldorf Astoria Shanghai on the Bund", "location": {"lat":31.233438, "lng":121.489849}, "visibility":true, "type":"hotel"},
-    {"name":"Swissôtel Grand Shanghai", "location": {"lat":31.225105, "lng":121.44708}, "visibility":true, "type":"hotel"},
-    {"name":"Howard Johnson Plaza Shanghai", "location": {"lat":31.304343, "lng":121.491094}, "visibility":true, "type":"hotel"},
-    {"name":"The Westin Bund Center Shanghai", "location": {"lat":31.231973, "lng":121.486563}, "visibility":true, "type":"hotel"},
-    {"name":"Fairmont Peace Hotel", "location": {"lat":31.239039, "lng":121.489543}, "visibility":true, "type":"hotel"},
-    {"name":"Le Royal Meridien Shanghai", "location": {"lat":31.234256, "lng":121.476388}, "visibility":true, "type":"hotel"},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
-    // {"name":"", "location": {"lat":, "lng":}, "visibility":true, "type":""},
+    {"name":"Oriental Pearl Tower", "location": {"lat":31.239689, "lng":121.499755}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Shanghai Ocean Aquarium", "location":{"lat":31.240696, "lng":121.501759}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Shanghai Disneyland", "location":{"lat":31.145279, "lng":121.657289}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"The Bund, Shanghai", "location":{"lat":31.240261, "lng":121.490577}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Yu Garden", "location":{"lat":31.227236, "lng":121.492094}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Shanghai Tower", "location":{"lat":31.233502, "lng":121.505763}, "visibility": true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Jade Buddha Temple", "location":{"lat":31.241347, "lng":121.445121}, "visibility":true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Nanjing Road", "location":{"lat":31.234774, "lng":121.474798}, "visibility":true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Shanghai Museum", "location":{"lat":31.228331, "lng":121.475528}, "visibility":true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Shanghai French Concession", "location":{"lat":31.207897, "lng":121.468997}, "visibility":true, "type": "sightseeing", "city": "Shanghai"},
+    {"name":"Radisson Blu Hotel Shanghai New World", "location": {"lat":31.234419, "lng":121.473541}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Marriott Hotel & Resorts", "location": {"lat":31.236871, "lng":121.473306}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Astor House Hotel", "location": {"lat":31.243964, "lng":121.491291}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Grand Hyatt Shanghai", "location": {"lat":31.235344, "lng":121.50578}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Waldorf Astoria Shanghai on the Bund", "location": {"lat":31.233438, "lng":121.489849}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Swissôtel", "location": {"lat":31.225105, "lng":121.44708}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Howard Johnson‘s’", "location": {"lat":31.304343, "lng":121.491094}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Bund Center", "location": {"lat":31.231973, "lng":121.486563}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Fairmont Peace Hotel", "location": {"lat":31.239039, "lng":121.489543}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Le Meridien", "location": {"lat":31.234256, "lng":121.476388}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"The Longemont Shanghai", "location": {"lat":31.210758, "lng":121.42942}, "visibility":true, "type":"hotel", "city": "Shanghai"},
+    {"name":"Century Park", "location": {"lat":31.215394, "lng":121.552157}, "visibility":true, "type":"outdoor", "city": "Shanghai"},
+    {"name":"Hongkou Football Stadium", "location": {"lat":31.270599, "lng":121.479414}, "visibility":true, "type":"outdoor", "city": "Shanghai"},
+    {"name":"Shanghai Expo Park", "location": {"lat":31.187361, "lng":121.48672}, "visibility":true, "type":"outdoor", "city": "Shanghai"},
+    {"name":"Gongqing Forest Park", "location": {"lat":31.320183, "lng":121.545383}, "visibility":true, "type":"outdoor", "city": "Shanghai"},
+    {"name":"People's Square", "location": {"lat":31.22967, "lng":121.476161}, "visibility":true, "type":"outdoor", "city": "Shanghai"},
+    {"name":"Speak Low (Bar)", "location": {"lat":31.214839, "lng":121.465899}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Cloud 9 (Pub)", "location": {"lat":31.235993, "lng":121.506054}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Flair (Bar)", "location": {"lat":31.236687, "lng":121.501127}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Bar Rouge", "location": {"lat":31.238376, "lng":121.489516}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Vue (Bar)", "location": {"lat":31.245524, "lng":121.493364}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Barbarossa (Bar)", "location": {"lat":31.231353, "lng":121.47184}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"California Club", "location": {"lat":31.21741, "lng":121.467244}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Big Bamboo (Pub)", "location": {"lat":31.224467, "lng":121.450718}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Myst (Club)", "location": {"lat":31.22089, "lng":121.44778}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Apartment (Pub)", "location": {"lat":31.211506, "lng":121.444105}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Dr. Beer (Bar)", "location": {"lat":31.220728, "lng":121.450454}, "visibility":true, "type":"bar", "city": "Shanghai"},
+    {"name":"Blue & Jazz (Bar)", "location": {"lat":31.235428, "lng":121.489211}, "visibility":true, "type":"bar", "city": "Shanghai"}
   ]
 ];
 
@@ -69,9 +69,13 @@ function initMap() {
     var map = new google.maps.Map(document.getElementById("map"), {
       center: {lat:31.239689, lng:121.499755},
       zoom: 15,
-      styles: styles
+      styles: styles2
       //mapTypeControl: false
     });
+    var sightseeingImage = "img/camera_21.png",
+        outdoorImage = "img/tree_19.png",
+        barImage = "img/bar_20.png",
+        hotelImage = "img/bed_28.png";
 
     // Make the markers
     var markers = [];
@@ -83,6 +87,22 @@ function initMap() {
         map: map,
         id: i
       });
+      // Set customized labels for each place type
+      // Attribution: https://stackoverflow.com/questions/16375077/using-icon-fonts-as-markers-in-google-maps-v3
+      // MarkerLabel: https://developers.google.com/maps/documentation/javascript/3.exp/reference#MarkerLabel
+      switch (data[1][i].type) {
+        case "sightseeing":
+          marker.setIcon(sightseeingImage);
+          break;
+        case "outdoor":
+          marker.setIcon(outdoorImage);
+          break;
+        case "bar":
+          marker.setIcon(barImage);
+          break;
+        default:
+          marker.setIcon(hotelImage);
+      }
       markers.push(marker);
       marker.addListener("click", function(){
         populateInfoWindow(this, infoWindow);
@@ -196,14 +216,14 @@ function initMap() {
       map.fitBounds(bounds);
     }
 
-    // Code below cause browser to respond really slow
-    // google.maps.event.addDomListener(window, 'resize', function() {
-    //   var bounds = new google.maps.LatLngBounds();
-    //   for (var i = 0; i < data.length; i++){
-    //     bounds.extend(markers[i].position);
-    //   }
-    //   map.fitBounds(bounds); // `bounds` is a `LatLngBounds` object
-    // });
+    // Ask maps to fit bounds everytime you resize windows
+    google.maps.event.addDomListener(window, 'resize', function() {
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < data[1].length; i++){
+        bounds.extend(markers[i].position);
+      }
+      map.fitBounds(bounds); // `bounds` is a `LatLngBounds` object
+    });
 
     /* The model
      *
@@ -277,18 +297,27 @@ function initMap() {
           self.placeType()[i].currentType(false);
         }
         selectedType.currentType(true);
-      }
+      };
 
       // computed real-time the visibility of true types
       this.filterTypes = ko.computed(function(){
         // loop through the placeType observableArray, if a object's currentType is true, then compare its type with each place's type
         for (var i=0; i < self.placeType().length; i++) {
           if (self.placeType()[i].currentType()===true){
-            for (var j=0; j < data[1].length; j++) {
-              if (self.placeType()[i].type()===data[1][j].type){
-                self.placeList()[j].visibility(true);
-              } else {
-                self.placeList()[j].visibility(false);
+            if (self.placeType()[i].type()==="all"){
+              for (var k=0; k < data[1].length; k++) {
+                self.placeList()[k].visibility(true);
+                markers[k].setMap(map);
+              }
+            } else {
+              for (var j=0; j < data[1].length; j++) {
+                if (self.placeType()[i].type()===data[1][j].type){
+                  self.placeList()[j].visibility(true);
+                  markers[j].setMap(map);
+                } else {
+                  self.placeList()[j].visibility(false);
+                  markers[j].setMap(null);
+                }
               }
             }
           }
