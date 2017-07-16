@@ -73,10 +73,10 @@ function initMap() {
       //mapTypeControl: false
     });
 
-    var sightseeingImage = "img/camera.png",
-        outdoorImage = "img/tree.png",
-        barImage = "img/bar.png",
-        hotelImage = "img/bed.png";
+    var sightseeingImage = "img/cameraDrop-35.png",
+        outdoorImage = "img/treeDrop-35.png",
+        barImage = "img/barDrop-35.png",
+        hotelImage = "img/bedDrop-35.png";
 
     // Make the markers
     var markers = [];
