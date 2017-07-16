@@ -72,10 +72,11 @@ function initMap() {
       styles: styles2
       //mapTypeControl: false
     });
-    var sightseeingImage = "img/camera_21.png",
-        outdoorImage = "img/tree_19.png",
-        barImage = "img/bar_20.png",
-        hotelImage = "img/bed_28.png";
+
+    var sightseeingImage = "img/camera.png",
+        outdoorImage = "img/tree.png",
+        barImage = "img/bar.png",
+        hotelImage = "img/bed.png";
 
     // Make the markers
     var markers = [];
